@@ -60,9 +60,9 @@
  
  document.getElementById('my-button').addEventListener('click', f, false);
 
+ 
 function f() {
  
- try{
  Notification.requestPermission(function(result) {
   if (result === 'denied') {
     console.log('Permission wasn\'t granted. Allow a retry.');
@@ -74,10 +74,6 @@ function f() {
   
   // Do something with the granted permission.
 });
-}
-catch(Exception e){
-	console.log('exception');
-  }
             function onShowNotification () {
                 console.log('notification is shown!');
             }

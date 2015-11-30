@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Site made with Mobirise Website Builder v2.5.2, http://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v2.5.2, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/animate.css/animate.min.css">
+  <link rel="stylesheet" href="assets/mobirise/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  
+</head>
+<body>
+
+			
+<section class="engine"><a rel="nofollow" >Fastest Chat</a></section>
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted" id="header1-0" style="background-color: rgb(0, 0, 0);">
+    
+                  <center>  <div class="mbr-hero animated fadeInUp"><button id="my-button">Notify me!</button>
+                        <p style="top:50px;" class="mbr-hero__subtext para">No Signup. Just Chat.</p>
+                    </div>
+					
+					
+                    
+					<b><input type="input" class="animated fadeInUp delay" id="username_id" placeholder="Username"  value="Username" style="margin-top:20px;width:80px;height:40px;text-align:center" autofocus></b>
+					
+					
+					
+					 <div class="mbr-hero animated fadeInUp"  style="text-align:left;width:50%;margin-left:auto;margin-right:auto;">
+                        <p id="chatss" style="overflow-y:scroll;top:100px;font-size:1em;font-family:Tahoma;" class="mbr-hero__subtext the_chat" >
+						Loading...
+						</p>
+                    </div>
+					
+					<b><input type="input" class="animated fadeInUp delay" id="chat_id" placeholder="Type chat here. Press Enter to send." style="font-size:1.3em;position:absolute;bottom:80px;width:50%;height:40px;margin-left:-25%;text-align:left;padding-left:10px; padding-right:10px;" autofocus>
+					</b>
+					</center>
+
+</section>
+<div align="center"><h1 class="mbr-footer__copyright" style="background-color:black;align:absolute!important;color: gray; font: 11px Courier New, sans-serif;">developer: mayank mohan upadhyay, mumayank@gmail.com</h1></div>
+     
+
+  <script src="assets/jquery/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
+  <script src="assets/mobirise/js/script.js"></script>
+  <script src="playsound.js"></script>
+  <script src="notify.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+ <script>
+ 
+ 
+ 
+ document.getElementById('my-button').addEventListener('click', function () {
+ 
+ Notification.requestPermission(function(result) {
+  if (result === 'denied') {
+    console.log('Permission wasn\'t granted. Allow a retry.');
+    return;
+  } else if (result === 'default') {
+    console.log('The permission request was dismissed.');
+    return;
+  }
+  // Do something with the granted permission.
+});
+
+            function onShowNotification () {
+                console.log('notification is shown!');
+            }
+            function onCloseNotification () {
+                console.log('notification is closed!');
+            }
+            function onClickNotification () {
+                console.log('notification was clicked!');
+            }
+            function onErrorNotification () {
+                console.error('Error showing notification. You may need to request permission.');
+            }
+            function onPermissionGranted () {
+                console.log('Permission has been granted by the user');
+                doNotification();
+            }
+            function onPermissionDenied () {
+                console.warn('Permission has been denied by the user');
+            }
+            function doNotification () {
+                var myNotification = new Notify('Yo dawg!', {
+                    body: 'This is an awesome notification',
+                    tag: 'My unique id',
+                    notifyShow: onShowNotification,
+                    notifyClose: onCloseNotification,
+                    notifyClick: onClickNotification,
+                    notifyError: onErrorNotification,
+                    timeout: 4
+                });
+                myNotification.show();
+            }
+            if (!Notify.needsPermission) {
+                doNotification();
+            } else if (Notify.isSupported()) {
+                Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+            }
+        }, false);
+
+
+
+
+
+
+
+
+
+
+ var search_query;
+ var myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
+ var notif;
+	
+$(document).ready(function(){
+
+
+
+
+
+
+
+	search_query = getUrlVars()['chatroom'];
+	$(".para").text(search_query);
+	
+	$("#chatss").height($("#chat_id").offset().top - $('#username_id').offset().top - $('#username_id').offset().top - $('#username_id').offset().top);
+	
+	myFirebaseRef.child(search_query).on("value", function(snapshot) {
+		$("#chatss").html(snapshot.val());
+		$("#chatss").animate({ scrollTop:100000 }, "slow");
+		$.playSound('ding');
+		
+		if(notif==1){
+			var myNotification = window.webkitNotifications.createNotification('image.jpg', 'New Chat!','Click to view');
+			myNotification.onclick = function() {
+				window.location = 'file:///D:/fasterstchat/chat.html?chatroom='+search_query;
+			}
+			myNotification.show();
+		}
+		});
+
+	
+	$("#chat_id").keyup(function(event){
+		if(event.keyCode == 13){
+		
+		ShowNotification("Custom Notification", "hi");
+		
+				if (window.webkitNotifications) {
+					if (window.webkitNotifications.checkPermission() != 0) {
+						window.webkitNotifications.requestPermission(function(){});
+						notif=1;
+					}
+				} else {
+					notif=0;
+				}
+
+
+				var az= $('#chatss').html();
+				var aa = document.getElementById('username_id').value;
+				var bb=': ';
+				var cc= document.getElementById('chat_id').value;
+				$("#chat_id").val("");
+				var dd='<br>';
+				
+		//	alert(aa);	
+		   myFirebaseRef.child(search_query).set(az+dd+aa+bb+cc);
+		} 
+	});
+});
+
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+  
+</body>
+</html>

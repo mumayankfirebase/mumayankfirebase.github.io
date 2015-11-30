@@ -58,7 +58,9 @@
  
  
  
- document.getElementById('my-button').addEventListener('click', function () {
+ document.getElementById('my-button').addEventListener('click', f, false);
+
+function f() {
  
  Notification.requestPermission(function(result) {
   if (result === 'denied') {
@@ -91,8 +93,8 @@
                 console.warn('Permission has been denied by the user');
             }
             function doNotification () {
-                var myNotification = new Notify('Yo dawg!', {
-                    body: 'This is an awesome notification',
+                var myNotification = new Notify('New Message!', {
+                    body: '',
                     tag: 'My unique id',
                     notifyShow: onShowNotification,
                     notifyClose: onCloseNotification,
@@ -107,9 +109,7 @@
             } else if (Notify.isSupported()) {
                 Notify.requestPermission(onPermissionGranted, onPermissionDenied);
             }
-        }, false);
-
-
+        }
 
 
 
@@ -140,16 +140,7 @@ $(document).ready(function(){
 		$("#chatss").animate({ scrollTop:100000 }, "slow");
 		$.playSound('ding');
 		
-				var myNotification = new Notify('New Message!', {
-                    body: 'Click to view',
-                    tag: 'My unique id',
-                    notifyShow: onShowNotification,
-                    notifyClose: onCloseNotification,
-                    notifyClick: onClickNotification,
-                    notifyError: onErrorNotification,
-                    timeout: 4
-                });
-                myNotification.show();
+				
 				
 				
 		});
@@ -172,15 +163,7 @@ $(document).ready(function(){
 	});
 });
 
-					
-function onShowNotification() {
-}
-function onCloseNotification() {
-}
-function onClickNotification() {
-}
-function onErrorNotification() {
-}
+	
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {

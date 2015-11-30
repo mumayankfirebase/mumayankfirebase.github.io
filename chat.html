@@ -140,31 +140,25 @@ $(document).ready(function(){
 		$("#chatss").animate({ scrollTop:100000 }, "slow");
 		$.playSound('ding');
 		
-		if(notif==1){
-			var myNotification = window.webkitNotifications.createNotification('image.jpg', 'New Chat!','Click to view');
-			myNotification.onclick = function() {
-				window.location = 'file:///D:/fasterstchat/chat.html?chatroom='+search_query;
-			}
-			myNotification.show();
-		}
+				var myNotification = new Notify('New Message!', {
+                    body: 'Click to view',
+                    tag: 'My unique id',
+                    notifyShow: onShowNotification,
+                    notifyClose: onCloseNotification,
+                    notifyClick: onClickNotification,
+                    notifyError: onErrorNotification,
+                    timeout: 4
+                });
+                myNotification.show();
+				
+				
 		});
 
 	
 	$("#chat_id").keyup(function(event){
 		if(event.keyCode == 13){
 		
-		ShowNotification("Custom Notification", "hi");
-		
-				if (window.webkitNotifications) {
-					if (window.webkitNotifications.checkPermission() != 0) {
-						window.webkitNotifications.requestPermission(function(){});
-						notif=1;
-					}
-				} else {
-					notif=0;
-				}
-
-
+				
 				var az= $('#chatss').html();
 				var aa = document.getElementById('username_id').value;
 				var bb=': ';

@@ -1,74 +1,229 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <!-- Site made with Mobirise Website Builder v2.5.2, http://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v2.5.2, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
-  <meta name="description" content="">
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/animate.css/animate.min.css">
-  <link rel="stylesheet" href="assets/mobirise/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Just Chat v2</title>
 
-			
-<section class="engine"><a rel="nofollow" >Fastest Chat</a></section>
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted" id="header1-0" style="background-color: rgb(0, 0, 0);">
-    <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-center">
-    
-       <div class="mbr-box__container mbr-section__container container">
-            <div class="mbr-box mbr-box--stretched"><div class="mbr-box__magnet mbr-box__magnet--center-center">
-                <div class="row"><div class=" col-sm-8 col-sm-offset-2">
-                    <div class="mbr-hero animated fadeInUp">
-                        <h1 class="mbr-hero__text" style="text-shadow: 0 0 0.05em #FFF, 0 0 0.05em #FFF,0 0 0.05em #FFF">Fastest Chat</h1>
-                        <p class="mbr-hero__subtext">No Signup. Just Chat.</p>
-                    </div>
-                    <div>
-					<b><input type="input" class="animated fadeInUp delay the_input" placeholder="Chat Name"  id="textbox_id" style="width:80px;height:40px;text-align:center" autofocus></b>
-					<br/><br/></div>
-					<div   class="mbr-buttons btn-inverse mbr-buttons--center"><button onclick="f()" id="button_id" class="mbr-buttons__btn btn btn-lg btn-default animated fadeInUp delay" style="padding-bottom:10px;padding-top:10px;padding-left:60px;padding-right:60px;">BEGIN</button></div>
-					</div>
-				</div></div>
-            </div></div>
-			<br/>
-        <div align="center"><p class="mbr-footer__copyright" style="color: gray; font: 11px Courier New, sans-serif;">developer: mayank mohan upadhyay, mumayank@gmail.com</p></div>
-        </div>
-    </div>
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		@font-face {
+			font-family: 'apple';
+			src:
+				local('apple'),
+				local('apple'),
+				url('apple.woff');
+		}
+		
+		@font-face {
+			font-family: 'appleregular';
+			src:
+				local('appleregular'),
+				local('appleregular'),
+				url('appleregular.woff');
+		}
+	</style>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body style="width:80%;margin-left:auto;margin-right:auto;font-family:appleregular;">
+    <center>
+	<h1 style="font-family:apple!important;">Just Chat</h1>
+	<h6 style="font-family:apple!important;letter-spacing: 2px;"><a href="http://www.gg.gg/justchat">gg.gg/justchat</a> + Fast + Free + Backup + No signups</h6>
+	<br/>
 	
-</section>
+	
+	
+<form method="get" action="javascript:void(0)" autocomplete="on">
+	<input placeholder="Chatroom Name" style="width:20%;text-align:center" name="chatroom" id="id_chatroom"autofocus required/>
+	<input placeholder="User Name" style="width:20%;text-align:center"name="username" id="id_username" required/>
+	<input type="submit" value="Start!"style="width:20%" id="id_button" onclick="login()"/>
+</form>
 
 
-  <script src="assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-  <script src="assets/mobirise/js/script.js"></script>
+
+
+	<br/><br/>
+	
+	
+	
+	<div> 
+	<p id="id_read" style="width:50%;overflow-y:scroll;text-align:left;">
+						Loading chat room, please wait.
+						</p>
+    </div>
+
+	<div style="margin-top:40px;width:80%;margin-left:auto;margin-right:auto;">
+	<b><input type="input" id="id_write" placeholder="Type chat here. Press Enter to send."style="width:60%;"/>
+	</b>
+	</div>
+	
+	
+	<div style="margin-top:15px">Mode:
+	<u><a id="#id_white" style="cursor:pointer;" onclick="day()">day</a></u>
+	<u><a id="#id_night" style="cursor:pointer;" onclick="night()">night</a></div></u>
+	
+	<div style="position:absolute;bottom:0px;width:80%;margin-left:auto;margin-right:auto;" id="id_info"><h6 style="font-family:apple!important;font-weight:900;letter-spacing: 2px;">developer: mayank mohan upadhyay, <a href="mailto:mumayank@gmail.com">mumayank@gmail.com</a></h6></div>
+    </div>
+	</center>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap.min.js"></script>
+	<script src="notify.js"></script>
+	<script src="playsound.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-  <script>
+	
+	<script>
+	$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
+	
+	$('#id_write').hide();
+	$('#id_read').hide();
+	
+	$(window).resize(function() {
+		$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
+	});
 
-  $("#textbox_id").keyup(function(event){
-    if(event.keyCode == 13){
-        $("#button_id").click();
-    }
-});
 
-  function f(){
-		var a=document.getElementById('textbox_id').value;
-			if(a=="" || a==null){
-				alert("Please Enter Chatroom Name.");
+	$("#id_chatroom").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#id_button").click();
+		}
+	});
+
+	$("#id_username").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#id_button").click();
+		}
+	});
+	
+	$("#id_write").keyup(function(event){
+		if(event.keyCode == 13){
+			fireb_write();
+		}
+	});
+
+	function day(){
+		document.body.style.backgroundColor = "white";
+		document.body.style.color="black";
+	}
+	
+	function night(){
+		document.body.style.backgroundColor = "black";
+		document.body.style.color="white";
+	}
+	
+	function login(){
+		var a=document.getElementById('id_chatroom').value;
+		var b=document.getElementById('id_username').value;
+		if(a=="" || a==null || b=="" || b==null){
+				//alert("Enter Chatroom Name and User Name, please.");
 			}else{
-				window.open("chat.html?chatroom="+a,"_self");
-			}
+				$('#id_read').show();
+				notif();
+				fireb();
+				$('#id_chatroom').prop('readonly', true);
+				$('#id_username').prop('readonly', true);
+				$("#id_button").hide();
+		}
+	}
+	
+	
+	
+	
+	function notif() {
+ 
+			 Notification.requestPermission(function(result) {
+			  if (result === 'denied') {
+				console.log('Permission wasn\'t granted. Allow a retry.');
+				return;
+			  } else if (result === 'default') {
+				console.log('The permission request was dismissed.');
+				return;
+			  }
+			  
+			  // Do something with the granted permission.
+			});
+			
+            function onShowNotification () {
+                console.log('notification is shown!');
+            }
+            function onCloseNotification () {
+                console.log('notification is closed!');
+            }
+            function onClickNotification () {
+                console.log('notification was clicked!');
+            }
+            function onErrorNotification () {
+                console.error('Error showing notification. You may need to request permission.');
+            }
+            function onPermissionGranted () {
+                console.log('Permission has been granted by the user');
+                doNotification();
+            }
+            function onPermissionDenied () {
+                console.warn('Permission has been denied by the user');
+            }
+            function doNotification () {
+                var myNotification = new Notify('New Message!', {
+                    body: 'via Just Chat',
+                    tag: 'My unique id',
+                    notifyShow: onShowNotification,
+                    notifyClose: onCloseNotification,
+                    notifyClick: onClickNotification,
+                    notifyError: onErrorNotification,
+                    timeout: 8
+                });
+                myNotification.show();
+            }
+            if (!Notify.needsPermission) {
+                doNotification();
+            } else if (Notify.isSupported()) {
+                Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+            }
+        }
+		
+		var myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
+		function fireb(){
+				myFirebaseRef.child($("#id_chatroom").val()).on("value", function(snapshot) {
+					if($('#id_write').is(':hidden')){
+						$("#id_read").val("");
+						$("#id_write").show();
+					}
+					$("#id_read").html(snapshot.val());
+					$("#id_read").animate({
+						scrollTop:$("#id_read")[0].scrollHeight - $("#id_read").height()},
+						"slow",
+						function(){
+							//on done:
+							console.log("done.");
+						})
+					$.playSound('owl');
+					notif();
+					$('#id_write').focus();
+				});
 		}
 
-  </script>
-  
-</body>
+		
+		function fireb_write(){
+				var a1= $('#id_read').html();
+				var a2= '<b>'+document.getElementById('id_username').value+'</b>';
+				var a3=': ';
+				var a4= document.getElementById('id_write').value+'<br/>';
+				$("#id_write").val("");
+				
+				//	alert(aa);	
+				myFirebaseRef.child( $('#id_chatroom').val() ).set(a1+a2+a3+a4); 
+		}
+	</script>
+  </body>
 </html>

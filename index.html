@@ -63,7 +63,7 @@
     </div>
 
 	<div style="margin-top:40px;width:80%;margin-left:auto;margin-right:auto;">
-	<b><input type="input" id="id_write" placeholder="Type chat here. Press Enter to send."style="width:60%;"/>
+	<b><input type="input" id="id_write" placeholder="Type chat here. Press Enter to send."style="width:60%;padding-right:10px;padding-left:10px;"/>
 	</b>
 	</div>
 	
@@ -85,7 +85,7 @@
 	
 	<script>
 	$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
-	
+			
 	$('#id_write').hide();
 	$('#id_read').hide();
 	
@@ -115,11 +115,19 @@
 	function day(){
 		document.body.style.backgroundColor = "white";
 		document.body.style.color="black";
+		$('#id_chatroom').css({'color' : 'black'});
+		$('#id_username').css({'color' : 'black'});
+		$('#id_write').css({'color' : 'black'});
+		$('#id_button').css({'color' : 'black'});
 	}
 	
 	function night(){
 		document.body.style.backgroundColor = "black";
 		document.body.style.color="white";
+		$('#id_chatroom').css({'color' : 'black'});
+		$('#id_username').css({'color' : 'black'});
+		$('#id_write').css({'color' : 'black'});
+		$('#id_button').css({'color' : 'black'});
 	}
 	
 	function login(){

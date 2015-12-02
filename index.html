@@ -82,10 +82,17 @@
   <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 	
 	<script>
-	$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
-			
-	$('#id_write').hide();
-	$('#id_read').hide();
+	
+	var myFirebaseRef;
+	
+	$(document).ready(function(){	
+		$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );		
+		$('#id_write').hide();
+		$('#id_read').hide();
+		myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
+	});
+	
+	
 	
 	$(window).resize(function() {
 		$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
@@ -135,7 +142,12 @@
 				//alert("Enter Chatroom Name and User Name, please.");
 			}else{
 				$('#id_read').show();
-				notif();
+				try {
+					notif();
+				}
+				catch(err) {
+					console.log(err);
+				}
 				fireb();
 				$('#id_chatroom').prop('readonly', true);
 				$('#id_username').prop('readonly', true);
@@ -198,7 +210,7 @@
             }
         }
 		
-		var myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
+		
 		function fireb(){
 				myFirebaseRef.child($("#id_chatroom").val()).on("value", function(snapshot) {
 					if($('#id_write').is(':hidden')){
@@ -214,7 +226,12 @@
 							console.log("done.");
 						})
 					$.playSound('owl');
-					notif();
+					try {
+						notif();
+					}
+					catch(err) {
+						console.log(err);
+					}
 					$('#id_write').focus();
 				});
 		}

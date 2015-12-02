@@ -55,7 +55,7 @@
 	
 	
 	<div> 
-	<p id="id_read" style="width:50%;overflow-y:scroll;text-align:left;">
+	<p id="id_read" style="width:60%;height:60%;overflow-y:scroll;text-align:left;">
 						Loading chat room, please wait.
 						</p>
     </div>
@@ -66,11 +66,11 @@
 	</div>
 	
 	
-	<div style="margin-top:10px">Mode:
+	<div style="margin-top:30px">Mode:
 	<u><a id="#id_white" style="cursor:pointer;" onclick="day()">day</a></u>
 	<u><a id="#id_night" style="cursor:pointer;" onclick="night()">night</a></div></u>
 	
-	<div style="position:absolute;bottom:0px;width:80%;margin-left:auto;margin-right:auto;" id="id_info"><h6 style="font-family:apple!important;letter-spacing: 2px;">developer: mayank mohan upadhyay, <a href="mailto:mumayank@gmail.com">mumayank@gmail.com</a></h6></div>
+	<div style="margin-top:10px" id="id_info"><h6 style="font-family:apple!important;letter-spacing: 2px;">developer: mayank mohan upadhyay, <a href="mailto:mumayank@gmail.com">mumayank@gmail.com</a></h6></div>
     </div>
 	</center>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -85,17 +85,23 @@
 	
 	var myFirebaseRef;
 	
+	read_resize();
+	$('#id_write').hide();
+	$('#id_read').hide();
+		
+		
 	$(document).ready(function(){	
-		$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );		
-		$('#id_write').hide();
-		$('#id_read').hide();
+		//$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );		
+		
 		myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
 	});
 	
-	
+	function read_resize(){
+		$("#id_read").height( window.innerHeight * 0.5 );
+	}
 	
 	$(window).resize(function() {
-		$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );
+		read_resize();
 	});
 
 

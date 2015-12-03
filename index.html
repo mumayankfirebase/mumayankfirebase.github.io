@@ -35,7 +35,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body style="width:80%;margin-left:auto;margin-right:auto;font-family:appleregular;">
+  <body id="id_body" style="width:80%;margin-left:auto;margin-right:auto;font-family:appleregular;">
     <center>
 	<h1 style="font-family:apple!important;">Just Chat</h1>
 	<h6 style="font-family:apple!important;letter-spacing: 2px;"><a href="http://www.gg.gg/justchat">gg.gg/justchat</a> + Fast + Free + Backup + No signups</h6>
@@ -61,7 +61,7 @@
     </div>
 
 	<div style="margin-top:20px;width:80%;margin-left:auto;margin-right:auto;">
-	<b><input type="input" id="id_write" placeholder="Type chat here. Press Enter to send."style="width:70%;padding-right:10px;padding-left:10px;"/>
+	<b><input type="input" id="id_write" placeholder="Type chat here. Press Enter to send."style="width:70%;padding-right:5px;padding-left:5px;"/>
 	</b>
 	</div>
 	
@@ -93,6 +93,8 @@
 		//$("#id_read").height( $("#id_info").offset().top - $('#id_read').offset().top - 100 );		
 		
 		myFirebaseRef = new Firebase("https://livewebchat.firebaseio.com/");
+		console.log("windowsizeee "+window.innerWidth);
+		body_resize();
 	});
 	
 	function read_resize(){
@@ -101,7 +103,16 @@
 	
 	$(window).resize(function() {
 		read_resize();
+		body_resize();
 	});
+	
+	function body_resize(){
+		if( window.innerWidth < 500 ){
+					$("#id_body").width( window.innerWidth * 0.95);
+		}else{
+					$("#id_body").width( window.innerWidth * 0.8 );
+		}
+	}
 
 
 	$("#id_chatroom").keyup(function(event){

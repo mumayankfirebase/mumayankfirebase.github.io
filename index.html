@@ -216,6 +216,8 @@
             }
             function onClickNotification () {
                 console.log('notification was clicked!');
+				window.focus();
+				this.cancel();
             }
             function onErrorNotification () {
                 console.error('Error showing notification. You may need to request permission.');
